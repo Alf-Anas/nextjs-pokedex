@@ -1,31 +1,3 @@
-export function safeArray(arr: any, defaultValue = []) {
-  if (Array.isArray(arr) && arr.length > 0) {
-    return arr;
-  }
-  return defaultValue;
-}
-
-export function safeObject(obj: any, defaultValue = {}) {
-  if (!!obj && typeof obj === "object") {
-    return obj;
-  }
-  return defaultValue;
-}
-
-export function safeString(str: any, defaultValue = "") {
-  if (!!str && typeof str === "string") {
-    return str;
-  }
-  return defaultValue;
-}
-
-export function safeNumber(num: any, defaultValue = 0) {
-  if (typeof num === "number") {
-    return num;
-  }
-  return defaultValue;
-}
-
 export const capitalized = (str: string) => {
   if (typeof str === "string") {
     const uppercase = str.replace(/(^|[\s-])\S/g, (match) =>
@@ -35,3 +7,27 @@ export const capitalized = (str: string) => {
   }
   return "";
 };
+
+export const errorResponse = (err: never | any) => {
+  let msg = "";
+
+  if (err.response) {
+    if (err.response.data?.message) {
+      msg = err.response.data?.message;
+    } else if (err.response?.data) {
+      msg = err.response.data;
+    } else if (err.response?.status) {
+      msg = err.response.status;
+    }
+  } else if (typeof err === "string") {
+    msg = err;
+  }
+  return msg;
+};
+
+export function safeObject(obj: any, defaultValue = {}) {
+  if (!!obj && typeof obj === "object") {
+    return obj;
+  }
+  return defaultValue;
+}

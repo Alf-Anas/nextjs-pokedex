@@ -1,8 +1,3 @@
-export interface ListParams {
-  limit: number;
-  offset: number;
-}
-
 export interface GetAllPokemon {
   count: number;
   next: any;
@@ -10,7 +5,7 @@ export interface GetAllPokemon {
   results: Result[];
 }
 
-export interface Result {
+interface Result {
   name: string;
   url: string;
 }

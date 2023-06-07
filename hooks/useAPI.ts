@@ -1,3 +1,4 @@
+import { errorResponse } from "@/utils";
 import { useState } from "react";
 
 type CustomArg = { onError?: (err: any) => void };
@@ -27,9 +28,9 @@ const useAPI = <DataType, ParamsType>(
       })
       .catch((err: any) => {
         setData(null);
-        setError(err);
+        setError(errorResponse(err));
         if (args?.onError) {
-          args.onError(err);
+          args.onError(errorResponse(err));
         }
       })
       .finally(() => setLoading(false));

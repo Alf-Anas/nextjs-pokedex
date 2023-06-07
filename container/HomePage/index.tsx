@@ -1,12 +1,15 @@
+import PokemonDetail from "@/component/pokemon/PokemonDetail";
 import API from "@/configs/api";
-import { GetAllPokemon, ListParams } from "@/configs/api.interface";
+import { ListParams } from "@/configs/interface/api.interface";
+import { GetAllPokemon } from "@/configs/interface/list-pokemon.interface";
 import useAPI from "@/hooks/useAPI";
-import { capitalized, safeArray } from "@/utils";
-import { Button, Card, Image, Skeleton, Space } from "antd";
+import { Card, Skeleton, Space, message } from "antd";
 import { useEffect } from "react";
 
 export default function HomePage() {
-  const listPokemon = useAPI<GetAllPokemon, ListParams>(API.getAllPokemon);
+  const listPokemon = useAPI<GetAllPokemon, ListParams>(API.getAllPokemon, {
+    onError: (err) => message.error({ content: err }),
+  });
 
   useEffect(() => {
     listPokemon.call();
@@ -24,18 +27,7 @@ export default function HomePage() {
         style={{ justifyContent: "space-between" }}
       >
         {listPokemon.data?.results.map((item, idx) => {
-          return (
-            <Button
-              key={idx}
-              type="primary"
-              danger={idx % 2 === 1}
-              shape="round"
-              size="large"
-              ghost
-            >
-              {idx + 1}. {capitalized(item.name)}
-            </Button>
-          );
+          return <PokemonDetail key={idx} name={item.name} index={idx} />;
         })}
       </Space>
     </Card>
