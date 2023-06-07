@@ -7,6 +7,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_BASE_PATH: /nextjs-pokedex
+      NODE_OPTIONS: "--max_old_space_size=4096"
 
     strategy:
       matrix:
@@ -20,12 +23,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install packages
-        env:
-          NODE_OPTIONS: "--max_old_space_size=4096"
         run: npm ci
       - name: Build project
-        env:
-          NODE_OPTIONS: "--max_old_space_size=4096"
         run: npm run build
       - name: Export static files
         run: npm run export
