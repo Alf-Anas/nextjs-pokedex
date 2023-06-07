@@ -6,6 +6,11 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+
+  env: {
+    HOST_URL: process.env.HOST_URL,
+    API_BASE_URL: process.env.API_BASE_URL,
+  },
 };
 
 module.exports = nextConfig;

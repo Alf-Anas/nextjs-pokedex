@@ -1,5 +1,5 @@
-const prefix = process.env.NEXT_PUBLIC_BASE_PATH || "";
+import { PREFIX } from "@/constant/env";
 
 export function addPrefix(url: string) {
-  return `${prefix}${url}`;
+  return `${PREFIX}${url}`;
 }
