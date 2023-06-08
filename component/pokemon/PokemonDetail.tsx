@@ -1,5 +1,5 @@
 import API from "@/configs/api";
-import { PokemonInfoParams } from "@/configs/interface/api.interface";
+import { CommonInfoParams } from "@/configs/interface/api.interface";
 import { PokemonInfoType } from "@/configs/interface/pokemon-info.interface";
 import useAPI from "@/hooks/useAPI";
 import { capitalized, safeObject } from "@/utils";
@@ -35,7 +35,7 @@ export default function PokemonDetail({ index, name = "" }: Props) {
   const [openModal, setOpenModal] = useState(false);
   const pokemonName = `${index + 1}. ${capitalized(name)}`;
 
-  const pokemonInfo = useAPI<PokemonInfoType, PokemonInfoParams>(
+  const pokemonInfo = useAPI<PokemonInfoType, CommonInfoParams>(
     API.getPokemonInfo,
     { onError: (err) => message.error({ content: err }) }
   );

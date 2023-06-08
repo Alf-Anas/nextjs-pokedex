@@ -3,7 +3,7 @@ export interface ListParams {
   offset: number;
 }
 
-export interface PokemonInfoParams {
+export interface CommonInfoParams {
   name?: string;
   id?: string;
 }
